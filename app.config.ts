@@ -1,4 +1,5 @@
 import type { ConfigContext, ExpoConfig } from "expo/config";
+import { resolve } from "node:path";
 
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
@@ -11,11 +12,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   userInterfaceStyle: "automatic",
   newArchEnabled: true,
   ios: {
-bundleIdentifier: "example.react-native-local-html",
+    bundleIdentifier: "example.react-native-local-html",
     supportsTablet: true,
   },
   android: {
-package: "example.react_native_local_html",
+    package: "example.react_native_local_html",
     adaptiveIcon: {
       foregroundImage: "./assets/images/adaptive-icon.png",
       backgroundColor: "#ffffff",
@@ -35,6 +36,13 @@ package: "example.react_native_local_html",
         imageWidth: 200,
         resizeMode: "contain",
         backgroundColor: "#ffffff",
+      },
+    ],
+    [
+      require("./plugins/with-assets.js"),
+      {
+        // Add asset directory paths, the plugin copies the files in the given paths to the app bundle folder named Assets
+        assetsPath: resolve(__dirname, "html"),
       },
     ],
   ],

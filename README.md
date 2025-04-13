@@ -1,50 +1,53 @@
-# Welcome to your Expo app 👋
+# React Native Webview Local HTML Example
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is a simple example of using React Native WebView to load local HTML files in a React Native application. The project demonstrates how to create a basic app that displays a local HTML file using the WebView component.
 
 ## Get started
 
 1. Install dependencies
 
    ```bash
-   npm install
+   pnpm install
    ```
 
 2. Start the app
 
    ```bash
-    npx expo start
+   pnpx expo start
    ```
 
-In the output, you'll find options to open the app in a
+### Key Points
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+The main implementation involves:
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- **Asset Copying**: The `app.config.ts` uses the `plugin/with-assets.js` plugin to copy HTML files to:
+  - Android: `android/app/src/main/assets/html/` directory
+  - iOS: `Assets` directory
+  - This is done by adding the following to `app.config.ts`:
+  ```ts
+   [
+     require("./plugins/with-assets.js"),
+     { assetsPath: resolve(__dirname, "html") },
+   ],
+  ```
+- **Platform-Specific URIs**:
+  - Android: `file:///android_asset/html/index.html`
+  - iOS: `file://html/index.html`
 
-## Get a fresh project
+```tsx
+import { Platform } from "react-native";
+import { WebView } from "react-native-webview";
 
-When you're ready, run:
+const htmlUrl = Platform.select({
+  ios: `file://html/index.html`,
+  android: "file:///android_asset/html/index.html",
+});
 
-```bash
-npm run reset-project
+export default function LocalHtmlViewer() {
+  return <WebView source={{ uri: htmlUrl }} originWhitelist={["*"]} />;
+}
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Troubleshooting
 
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- If HTML content doesn't appear, try run `pnpx expo prebuild --clean` to clean the build cache.
