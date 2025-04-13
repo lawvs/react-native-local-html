@@ -11,9 +11,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   userInterfaceStyle: "automatic",
   newArchEnabled: true,
   ios: {
+bundleIdentifier: "example.react-native-local-html",
     supportsTablet: true,
   },
   android: {
+package: "example.react_native_local_html",
     adaptiveIcon: {
       foregroundImage: "./assets/images/adaptive-icon.png",
       backgroundColor: "#ffffff",
