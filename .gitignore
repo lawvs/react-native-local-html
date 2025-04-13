@@ -1,0 +1,26 @@
+# React Native
+node_modules/
+*.log
+*.swp
+*.swo
+*.DS_Store
+*.idea/
+.expo/
+.expo-shared/
+
+# iOS
+ios
+
+# Android
+android
+*.keystore
+
+# Testing
+coverage/
+jest-cache/
+jest-config/
+
+# Misc
+.env
+*.tmp
+*.bak
