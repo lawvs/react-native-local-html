@@ -39,8 +39,9 @@ import { Platform } from "react-native";
 import { WebView } from "react-native-webview";
 
 const htmlUrl = Platform.select({
-  ios: `file://html/index.html`,
+  ios: "html/index.html",
   android: "file:///android_asset/html/index.html",
+  default: "",
 });
 
 export default function LocalHtmlViewer() {
