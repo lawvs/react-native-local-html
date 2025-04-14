@@ -2,6 +2,12 @@
 
 This is a simple example of using React Native WebView to load local HTML files in a React Native application. The project demonstrates how to create a basic app that displays a local HTML file using the WebView component.
 
+## Features
+
+- Works on both iOS and Android platforms
+- Supports loading local JavaScript and CSS files
+- Uses [Continuous Native Generation (CNG)](https://docs.expo.dev/workflow/continuous-native-generation/) for easy management of different platforms
+
 ## Get started
 
 1. Install dependencies
@@ -32,7 +38,7 @@ The main implementation involves:
   ```
 - **Platform-Specific URIs**:
   - Android: `file:///android_asset/html/index.html`
-  - iOS: `file://html/index.html`
+  - iOS: `html/index.html`
 
 ```tsx
 import { Platform } from "react-native";
