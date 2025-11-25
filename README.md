@@ -1,5 +1,10 @@
 # React Native Webview Local HTML Example
 
+iOS             |  Android
+:-------------------------:|:-------------------------:
+![](https://github.com/user-attachments/assets/eac329f6-25c9-4a8c-a921-c1890ec67600)  |  ![](https://github.com/user-attachments/assets/a2902a51-a9da-4f18-a09c-54792823cd60)
+
+
 This is a simple example of using React Native WebView to load local HTML files, including local JavaScript and CSS files.
 
 ## Features
@@ -20,8 +25,14 @@ The main implementation involves:
   const config = {
     plugins: [
       [
-        require("./plugins/with-assets.js"),
-        { assetsPath: resolve(__dirname, "html") },
+        // https://github.com/Malaa-tech/expo-custom-assets
+        "expo-custom-assets",
+        {
+          // The plugin copies the files in the given paths to the app bundle folder named Assets
+          assetsPaths: ["./html"],
+          // Preserve the folder structure use this prop (default: false)
+          preserveFolder: true,
+        },
       ],
     ],
   };
