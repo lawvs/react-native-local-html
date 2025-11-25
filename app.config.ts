@@ -39,10 +39,15 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       },
     ],
     [
-      require("./plugins/with-assets.js"),
+      // https://github.com/Malaa-tech/expo-custom-assets
+      "expo-custom-assets",
       {
         // Add asset directory paths, the plugin copies the files in the given paths to the app bundle folder named Assets
-        assetsPath: resolve(__dirname, "html"),
+        assetsPaths: ["./html"],
+        // if you want custom assets directory name use this prop (default: "Assets")
+        // "assetsDirName": "testName"
+        // if you want to preserve the folder structure use this prop (default: false)
+        preserveFolder: true,
       },
     ],
   ],
