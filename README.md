@@ -17,7 +17,7 @@ This is a simple example of using React Native WebView to load local HTML files,
 
 The main implementation involves:
 
-- **Asset Copying**: The `app.config.ts` uses the `plugin/with-assets.js` plugin to copy HTML files to:
+- **Asset Copying**: The `app.config.ts` uses the `expo-custom-assets` plugin to copy HTML files to:
   - Android: `android/app/src/main/assets/` directory
   - iOS: `Assets/` directory
   - This is done by adding the following to `app.config.ts`:
